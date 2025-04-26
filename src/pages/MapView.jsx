@@ -1,24 +1,28 @@
+import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import AnimatedMarker from 'react-leaflet-animated-marker';
-import { useEffect, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 
 export default function MapView() {
   const [trips, setTrips] = useState([]);
 
   useEffect(() => {
-    fetch('https://data.cityofchicago.org/resource/fg6s-gzvg.json?$limit=2000')
+    fetch('https://data.cityofchicago.org/resource/fg6s-gzvg.json?$limit=1000')
       .then(r => r.json())
-      .then(d => setTrips(d.filter(t=>t.from_latitude&&t.to_latitude)));
+      .then(d => setTrips(d.filter(t => t.from_latitude && t.to_latitude)));
   }, []);
 
   return (
     <>
-      <h2>Live Trip Map</h2>
-      <MapContainer center={[41.8781, -87.6298]} zoom={12} style={{ height: 600 }}>
+      <h2>Live Map of Trips</h2>
+      <MapContainer
+        center={[41.8781, -87.6298]}
+        zoom={12}
+        style={{ height:'600px', borderRadius:8 }}
+      >
         <TileLayer
-          attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="&copy; OpenStreetMap contributors"
         />
         {trips.map(t => (
           <AnimatedMarker
@@ -30,7 +34,7 @@ export default function MapView() {
             duration={t.trip_duration * 1000}
             icon={{
               iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-              iconSize: [32, 32]
+              iconSize: [32,32]
             }}
           />
         ))}
@@ -38,7 +42,3 @@ export default function MapView() {
     </>
   );
 }
-//``` :contentReference[oaicite:17]{index=17} :contentReference[oaicite:18]{index=18}
-
-
-

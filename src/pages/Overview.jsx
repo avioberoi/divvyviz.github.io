@@ -1,33 +1,37 @@
+import React from 'react';
 import { Row, Col, Typography, Image } from 'antd';
 import StatisticCard from '../components/StatisticCard';
+
 const { Title, Paragraph } = Typography;
 
 export default function Overview() {
-  // dummy stats; in real useEffect fetch summary from API
+  // Replace with real fetched stats later
   const stats = [
-    { title: 'Total Trips',  value: 21200000, suffix: '' },
-    { title: 'Average Duration', value: 560, suffix: 's' },
-    { title: 'Active Stations',  value: 700, suffix: '' },
+    { title:'Total Trips',           value:21_200_000 },
+    { title:'Avg Trip Duration (s)', value: 560 },
+    { title:'Active Stations',       value: 700 },
   ];
 
   return (
     <>
       <Title level={2}>Overview</Title>
       <Paragraph>
-        This dashboard visualizes Divvy bike-sharing trips with real-time mapping and analytics.
+        A high-level snapshot of Divvy usage: total trips, average durations, and station coverage.
       </Paragraph>
-      <Row gutter={[16, 16]}>
+
+      <Row gutter={[16,16]}>
         {stats.map(s => (
           <Col key={s.title}>
             <StatisticCard {...s} />
           </Col>
-        ))} 
+        ))}
       </Row>
+
       <Image
-        width={600}
-        src="https://placekitten.com/800/400"
-        alt="Sample promo image"
-        style={{ margin: '24px auto', display: 'block' }}
+        width="100%"
+        style={{ marginTop:24, borderRadius:8 }}
+        src="https://placekitten.com/800/300"
+        alt="Decorative graphic"
       />
     </>
   );

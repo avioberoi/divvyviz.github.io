@@ -6,7 +6,7 @@ import './index.css';
 import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter> basename="/divvyviz.github.io"
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <App />
   </BrowserRouter>
 );

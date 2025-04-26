@@ -11,7 +11,13 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "antd": "^5.x",
+    "react-router-dom": "^6.x",
+    "react-leaflet": "^4.x",
+    "leaflet": "^1.9.x",
+    "react-leaflet-animated-marker": "^1.x",
+    "recharts": "^2.x"
   },
   "scripts": {
     "start": "react-scripts start",
