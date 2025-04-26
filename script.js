@@ -75,8 +75,12 @@ const VIZ = {
     updateVisuals();
   });
   
-  // Re-render map & chart when filters or slider change
   function updateVisuals() {
+    if (!trips || trips.length === 0) {
+      // If trips is not initialized, exit the function
+      return;
+    }
+  
     // Clear existing markers
     map.eachLayer(l => (l instanceof L.Marker) && map.removeLayer(l));
   
@@ -91,7 +95,7 @@ const VIZ = {
       return true;
     });
   
-    // Animate each trip as a moving marker :contentReference[oaicite:18]{index=18}
+    // Animate each trip as a moving marker
     filtered.forEach(d => {
       const from = [ +d.from_latitude, +d.from_longitude ];
       const to   = [ +d.to_latitude,   +d.to_longitude ];
@@ -117,4 +121,4 @@ const VIZ = {
       return Math.round((durations[h]||0)/c);
     });
     tripChart.update();
-  }  
+  }
