@@ -2,18 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Divvy Trips Dashboard</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+
+  <!-- Leaflet CSS & JS -->
+  <link 
+    rel="stylesheet" 
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+    crossorigin="" 
+  /> <!-- :contentReference[oaicite:7]{index=7} -->
+  <script 
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+    crossorigin="">
+  </script> <!-- :contentReference[oaicite:8]{index=8} -->
+
+  <!-- noUiSlider CSS & JS -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script> <!-- :contentReference[oaicite:9]{index=9} -->
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- :contentReference[oaicite:10]{index=10} -->
+
+  <!-- MovingMarker plugin -->
+  <script src="https://unpkg.com/leaflet-moving-marker/Leaflet.MovingMarker.min.js"></script> <!-- :contentReference[oaicite:11]{index=11} -->
+
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Leaflet.js core library -->  
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script> <!-- :contentReference[oaicite:4]{index=4} -->
-
-  <!-- MovingMarker plugin for Leaflet -->  
-  <script src="https://unpkg.com/leaflet-movingmarker/Leaflet.MovingMarker.min.js"></script> <!-- :contentReference[oaicite:5]{index=5} -->
 </head>
 <body>
-  <div id="map"></div>
+  <header class="header">
+    <h1>Divvy Trips Visualization</h1>
+  </header>
+  <div class="dashboard-grid">
+    <aside class="sidebar">
+      <div class="control-group">
+        <label for="date-slider">Date range:</label>
+        <div id="date-slider"></div>
+      </div>
+      <div class="control-group">
+        <label for="user-type">User Type:</label>
+        <select id="user-type">
+          <option value="All">All</option>
+          <option value="Subscriber">Subscriber</option>
+          <option value="Customer">Customer</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="gender">Gender:</label>
+        <select id="gender">
+          <option value="All">All</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div id="loading-indicator">Loading… 0%</div>
+    </aside>
+
+    <section id="map" class="map-panel"></section>
+
+    <section class="chart-panel">
+      <canvas id="tripChart"></canvas>
+    </section>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,18 +1,60 @@
-/* Fullscreen map container */
-#map {
-    position: absolute;
-    top: 0; bottom: 0; left: 0; right: 0;
-  }
-  
-  /* Custom bike icon as a Leaflet divIcon */
-  .bike-icon {
-    width: 32px;
-    height: 32px;
-    background-image: url('bike.svg');
-    background-size: contain;
-    transition: transform 0.3s ease-in-out; /* smooth scaling :contentReference[oaicite:6]{index=6} */
-  }
-  .bike-icon:hover {
-    transform: scale(1.2);
-  }
-  
+/* Base reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Fullscreen header + grid layout using CSS Grid, with dense packing :contentReference[oaicite:12]{index=12} */
+.header {
+  grid-column: 1 / -1;
+  background: #2a9d8f;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-areas:
+    "sidebar map"
+    "sidebar chart";
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 1fr 300px;
+  gap: 1rem;
+  height: calc(100vh - 60px);
+  padding: 1rem;
+  font-family: sans-serif;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background: #f4f4f4;
+  padding: 1rem;
+  overflow-y: auto;
+  border-radius: 8px;
+}
+.map-panel { grid-area: map; border-radius: 8px; overflow: hidden; }
+.chart-panel { 
+  grid-area: chart;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.control-group {
+  margin-bottom: 1rem;
+}
+#loading-indicator {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* noUiSlider tweaks */
+.noUi-origin { background: #264653; }
+.noUi-handle { border: 2px solid #264653; }
+
+/* Bike icon for markers */
+.bike-icon {
+  width: 32px;
+  height: 32px;
+  background: url('https://cdn-icons-png.flaticon.com/512/684/684908.png') center/contain no-repeat;
+  transition: transform 0.2s;
+}
+.bike-icon:hover { transform: scale(1.3); }
