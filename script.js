@@ -21,7 +21,7 @@ const VIZ = {
   let currentRange = [0, 23];
   dateSlider.noUiSlider.on('update', v => {
     currentRange = v.map(Number);
-    updateVisuals();
+    //updateVisuals();
   });
   
   // Chart.js dual-axis config :contentReference[oaicite:16]{index=16}
