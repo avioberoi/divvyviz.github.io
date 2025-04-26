@@ -1,0 +1,18 @@
+/* Fullscreen map container */
+#map {
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+  }
+  
+  /* Custom bike icon as a Leaflet divIcon */
+  .bike-icon {
+    width: 32px;
+    height: 32px;
+    background-image: url('bike.svg');
+    background-size: contain;
+    transition: transform 0.3s ease-in-out; /* smooth scaling :contentReference[oaicite:6]{index=6} */
+  }
+  .bike-icon:hover {
+    transform: scale(1.2);
+  }
+  
