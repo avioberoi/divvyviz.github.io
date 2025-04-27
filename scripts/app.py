@@ -12,7 +12,7 @@ from datetime import datetime
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_csv("data_files/202004-divvy-tripdata.csv")
+        df = pd.read_csv("/Users/hassaanulhaq/Library/Mobile Documents/com~apple~CloudDocs/spring_2025/transit_hackaton/divvyviz.github.io/data_files/202004-divvy-tripdata.csv")
         df['started_at'] = pd.to_datetime(df['started_at'])
         df['ended_at'] = pd.to_datetime(df['ended_at'])
         df['ride_duration'] = (df['ended_at'] - df['started_at']).dt.total_seconds() / 60
