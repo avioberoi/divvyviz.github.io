@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st # type: ignore
 st.set_page_config(layout="wide")
 
 import pandas as pd

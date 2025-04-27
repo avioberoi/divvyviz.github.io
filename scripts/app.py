@@ -12,7 +12,7 @@ from datetime import datetime
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_csv("202004-divvy-tripdata.csv")
+        df = pd.read_csv("data_files/202004-divvy-tripdata.csv")
         df['started_at'] = pd.to_datetime(df['started_at'])
         df['ended_at'] = pd.to_datetime(df['ended_at'])
         df['ride_duration'] = (df['ended_at'] - df['started_at']).dt.total_seconds() / 60
@@ -93,7 +93,7 @@ filtered_df = df[
 # -----------------------
 # Tabs Setup
 # -----------------------
-tab1, tab2, tab3, tab4 = st.tabs(["Overview", "Patterns", "Durations", "Map"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Overview", "Patterns", "Durations", "Map", "Demand Prediction"])
 
 # Initialize session state flags for donut plots
 if "donuts_loaded" not in st.session_state:
@@ -150,75 +150,6 @@ with tab2:
     except Exception as e:
         st.error("Error in Hourly Ride Trends: " + str(e))
 
-    
-    st.subheader("Hourly Trip Duration Distribution (Box Plot) – All Riders")
-    try:
-        fig_hourly_box = px.box(
-            filtered_df,
-            x='start_hour',
-            y='ride_duration',
-            color='member_casual',
-            title="Hourly Trip Duration Distribution (All Riders)",
-            labels={'start_hour': 'Hour of Day', 'ride_duration': 'Trip Duration (minutes)'},
-            color_discrete_map={'member': '#1F77B4', 'casual': '#FF7F0E'},
-            points="all"
-        )
-        fig_hourly_box.update_layout(
-            plot_bgcolor='white',
-            xaxis_title='Hour of Day',
-            yaxis_title='Trip Duration (minutes)',
-            height=300,
-            margin=dict(l=20, r=20, t=50, b=20)
-        )
-        st.plotly_chart(fig_hourly_box, use_container_width=True)
-    except Exception as e:
-        st.error("Error in Hourly Box Plot (All Riders): " + str(e))
-    
-    st.subheader("Hourly Trip Duration Distribution – Member Riders")
-    try:
-        member_df = filtered_df[filtered_df['member_casual'] == 'member']
-        fig_member_box = px.box(
-            member_df,
-            x='start_hour',
-            y='ride_duration',
-            title="Hourly Trip Duration Distribution: Member Riders",
-            labels={'start_hour': 'Hour of Day', 'ride_duration': 'Trip Duration (minutes)'},
-            color_discrete_sequence=['#1F77B4'],
-            points="all"
-        )
-        fig_member_box.update_layout(
-            plot_bgcolor='white',
-            xaxis_title='Hour of Day',
-            yaxis_title='Trip Duration (minutes)',
-            height=300,
-            margin=dict(l=20, r=20, t=50, b=20)
-        )
-        st.plotly_chart(fig_member_box, use_container_width=True)
-    except Exception as e:
-        st.error("Error in Hourly Box Plot (Member Riders): " + str(e))
-    
-    st.subheader("Hourly Trip Duration Distribution – Casual Riders")
-    try:
-        casual_df = filtered_df[filtered_df['member_casual'] == 'casual']
-        fig_casual_box = px.box(
-            casual_df,
-            x='start_hour',
-            y='ride_duration',
-            title="Hourly Trip Duration Distribution: Casual Riders",
-            labels={'start_hour': 'Hour of Day', 'ride_duration': 'Trip Duration (minutes)'},
-            color_discrete_sequence=['#FF7F0E'],
-            points="all"
-        )
-        fig_casual_box.update_layout(
-            plot_bgcolor='white',
-            xaxis_title='Hour of Day',
-            yaxis_title='Trip Duration (minutes)',
-            height=300,
-            margin=dict(l=20, r=20, t=50, b=20)
-        )
-        st.plotly_chart(fig_casual_box, use_container_width=True)
-    except Exception as e:
-        st.error("Error in Hourly Box Plot (Casual Riders): " + str(e))
 
 # -----------------------
 # Tab3: Durations and Routes
@@ -432,3 +363,14 @@ with tab4:
         st.map(map_data)
     except Exception as e:
         st.error("Error in Map: " + str(e))
+
+# -----------------------
+# Tab5: Demand Prediction
+# -----------------------
+with tab5:
+    from PIL import Image
+    st.title("Demand Prediction")
+    image_a = Image.open("/Users/hassaanulhaq/Library/Mobile Documents/com~apple~CloudDocs/spring_2025/transit_hackaton/divvyviz.github.io/scripts/a.png")
+    st.image(image_a, caption="Demand Prediction Model")
+    image_b = Image.open("/Users/hassaanulhaq/Library/Mobile Documents/com~apple~CloudDocs/spring_2025/transit_hackaton/divvyviz.github.io/scripts/b.jpeg")
+    st.image(image_b, caption="Future Prediction")
